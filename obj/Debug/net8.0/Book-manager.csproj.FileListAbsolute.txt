@@ -105,3 +105,7 @@
 /home/vittor/Book-manager/bin/Debug/net8.0/runtimes/win/lib/net8.0/System.Diagnostics.EventLog.Messages.dll
 /home/vittor/Book-manager/bin/Debug/net8.0/runtimes/win/lib/net8.0/System.Diagnostics.EventLog.dll
 /home/vittor/Book-manager/bin/Debug/net8.0/runtimes/win/lib/net8.0/System.Security.Cryptography.Pkcs.dll
+/home/vittor/Book-manager/obj/Debug/net8.0/Book-manager.sourcelink.json
+/home/vittor/Book-manager/bin/Debug/net8.0/MediatR.dll
+/home/vittor/Book-manager/bin/Debug/net8.0/MediatR.Contracts.dll
+/home/vittor/Book-manager/bin/Debug/net8.0/MediatR.Extensions.Microsoft.DependencyInjection.dll

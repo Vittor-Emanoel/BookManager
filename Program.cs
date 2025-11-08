@@ -7,7 +7,10 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
 
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Program).Assembly));
+
 builder.Services.AddScoped<IBooksRepository, BooksRepository>();
+
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 

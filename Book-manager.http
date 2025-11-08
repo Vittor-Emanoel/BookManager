@@ -1,8 +1,8 @@
 @Book_manager_HostAddress = http://localhost:5034
 
-### POST /api/Books
+### POST /Api/Books
 
-POST {{Book_manager_HostAddress}}/api/Books
+POST {{Book_manager_HostAddress}}/Api/Books
 Accept: application/json
 Content-Type: application/json
 
