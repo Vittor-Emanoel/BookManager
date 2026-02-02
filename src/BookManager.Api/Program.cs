@@ -1,6 +1,9 @@
+using System.Data;
+using Book_manager.src.BookManager.Application;
 using Book_manager.src.BookManager.Domain.Interfaces;
 using Book_manager.src.BookManager.Infrastructure.repositories;
 using FluentMigrator.Runner;
+using Npgsql;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,25 +11,27 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
 
-builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Program).Assembly));
+// 🔥 registra MediatR dentro do Application
+builder.Services.AddApplication();
 
-builder.Services.AddScoped<IBookRepository, BooksRepository>();
+// Repositórios
+builder.Services.AddScoped<IBookRepository, BookRepository>();
 
+// Conexão Dapper
+builder.Services.AddScoped<IDbConnection>(_ =>
+    new NpgsqlConnection(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-
+// FluentMigrator
 builder.Services.AddFluentMigratorCore()
-.ConfigureRunner(config => config
-    .AddPostgres()
-    .WithGlobalConnectionString(builder.Configuration.GetConnectionString("DefaultConnection"))
-    .ScanIn(typeof(Program).Assembly).For.Migrations()).AddLogging(l => l.AddFluentMigratorConsole());
-
-
-
+    .ConfigureRunner(config => config
+        .AddPostgres()
+        .WithGlobalConnectionString(builder.Configuration.GetConnectionString("DefaultConnection"))
+        .ScanIn(typeof(Program).Assembly).For.Migrations())
+    .AddLogging(l => l.AddFluentMigratorConsole());
 
 var app = builder.Build();
 
-
+// Executar migrations
 using (var scope = app.Services.CreateScope())
 {
     var runner = scope.ServiceProvider.GetRequiredService<IMigrationRunner>();
@@ -43,4 +48,3 @@ app.UseHttpsRedirection();
 app.MapControllers();
 
 app.Run();
-

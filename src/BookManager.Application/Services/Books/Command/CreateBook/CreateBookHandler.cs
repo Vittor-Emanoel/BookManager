@@ -16,21 +16,32 @@ namespace Book_manager.src.BookManager.Application.Services.Books.Command.Create
 
         public async Task<CommandResponse> Handle(CreateBookCommand request, CancellationToken cancellationToken)
         {
-            var bookToSave = new Book
-            {
-                Name = request.Name,
-                Author = request.Author,
-                ImageUrl = request.ImageUrl,
-                Rating = request.Rating,
-                Status = request.Status,
-                Description = request.Description
-            };
+            var book = Book.Create(
+                request.Name,
+                request.Author,
+                request.ImageUrl,
+                request.Description);
 
-            var success = await _booksRepository.SaveAsync(bookToSave);
+            if (request.Status == Domain.Enums.BookStatus.Reading)
+            {
+                book.StartReading();
+            }
+
+            if (request.Status == Domain.Enums.BookStatus.Read)
+            {
+                book.StartReading();
+                book.FinishReading(request.Rating);
+            }
+
+            var success = await _booksRepository.SaveAsync(book);
 
             if (!success)
             {
-                return new CommandResponse { Success = false, Message = "Falha ao criar o livro." };
+                return new CommandResponse
+                {
+                    Success = false,
+                    Message = "Falha ao criar o livro."
+                };
             }
 
             return new CommandResponse
