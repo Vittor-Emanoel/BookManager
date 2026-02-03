@@ -11,10 +11,11 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
 
-// 🔥 registra MediatR dentro do Application
+//  registra MediatR dentro do Application
 builder.Services.AddApplication();
 
 // Repositórios
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IBookRepository, BookRepository>();
 
 // Conexão Dapper

@@ -5,13 +5,15 @@ namespace Book_manager.src.BookManager.Domain.Interfaces;
 
 public interface IBookSearchQuery
 {
-    public string? Name { get; init; }
-    public string? Author { get; init; }
-    public int? MinRating { get; init; }
-    public BookStatus? Status { get; init; }
-    public int PageSize { get; set; }
-    public int PageNumber { get; init; }
+    string? Name { get; init; }
+    string? Author { get; init; }
+    int? MinRating { get; init; }
+    BookStatus? Status { get; init; }
+
+    int PageSize { get; init; }
+    int PageNumber { get; init; }
 }
+
 
 public interface IBookRepository
 {

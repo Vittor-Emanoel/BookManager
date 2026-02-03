@@ -1,7 +1,8 @@
 @Book_manager_HostAddress = http://localhost:5034
 
-### POST /Api/Books
-
+### =========================
+### POST /Api/Books (CREATE)
+### =========================
 POST {{Book_manager_HostAddress}}/Api/Books
 Accept: application/json
 Content-Type: application/json
@@ -11,8 +12,46 @@ Content-Type: application/json
   "author": "Machado de Assis",
   "imageUrl": "https://example.com/domcasmurro.jpg",
   "rating": 5,
-  "status": 3,
+  "status": 2,
   "description": "Um clássico da literatura brasileira."
 }
 
-###
+### =========================
+### GET /Api/Books (SEARCH)
+### =========================
+
+### 2) Buscar por texto (query)
+GET {{Book_manager_HostAddress}}/Api/Books?query=dom
+Accept: application/json
+
+### 3) Buscar por status
+GET {{Book_manager_HostAddress}}/Api/Books?bookStatus=2
+Accept: application/json
+
+### 4) Buscar por query + status
+GET {{Book_manager_HostAddress}}/Api/Books?query=dom&bookStatus=3
+Accept: application/json
+
+### 5) Buscar com paginação
+GET {{Book_manager_HostAddress}}/Api/Books?query=dom&page=2&pageSize=10
+Accept: application/json
+
+### 6) Buscar com paginação (página 2)
+GET {{Book_manager_HostAddress}}/Api/Books?query=dom&page=4&pageSize=5
+Accept: application/json
+
+### 7) Ordenar por Name (default)
+GET {{Book_manager_HostAddress}}/Api/Books?query=dom&orderBy=Name
+Accept: application/json
+
+### 8) Ordenar por Rating
+GET {{Book_manager_HostAddress}}/Api/Books?query=dom&orderBy=Rating
+Accept: application/json
+
+### 9) Ordenar por Rating DESC
+GET {{Book_manager_HostAddress}}/Api/Books?query=dom&orderBy=Rating&desc=true
+Accept: application/json
+
+### 10) Ordenar por CreatedAt DESC (exemplo)
+GET {{Book_manager_HostAddress}}/Api/Books?orderBy=CreatedAt&desc=true&page=1&pageSize=10
+Accept: application/json

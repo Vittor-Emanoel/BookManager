@@ -218,3 +218,8 @@ C:/Users/VittorEmanoel/Documents/apps/Book-manager-back/obj/Debug/net8.0/ref/Boo
 /home/vittor/Book-manager/obj/Debug/net8.0/Book-manager.pdb
 /home/vittor/Book-manager/obj/Debug/net8.0/Book-manager.genruntimeconfig.cache
 /home/vittor/Book-manager/obj/Debug/net8.0/ref/Book-manager.dll
+/home/vittor/Book-manager/bin/Debug/net8.0/Microsoft.Extensions.Diagnostics.Abstractions.dll
+/home/vittor/Book-manager/bin/Debug/net8.0/Microsoft.Extensions.Hosting.Abstractions.dll
+/home/vittor/Book-manager/bin/Debug/net8.0/Microsoft.Extensions.ObjectPool.dll
+/home/vittor/Book-manager/bin/Debug/net8.0/Microsoft.Extensions.WebEncoders.dll
+/home/vittor/Book-manager/bin/Debug/net8.0/System.Security.Cryptography.Xml.dll
