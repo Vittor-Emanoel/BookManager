@@ -40,8 +40,8 @@ namespace Book_manager.src.BookManager.Api.controllers
         public async Task<ActionResult> Search([FromQuery] SearchBooksRequest request)
         {
             var query = new SearchBooksQuery(
-                request.query,
-                request.bookStatus,
+                request.Query,
+                request.BookStatus,
                 request.Page,
                 request.PageSize,
                 request.OrderBy
@@ -55,5 +55,39 @@ namespace Book_manager.src.BookManager.Api.controllers
             return Ok(result);
         }
 
+        [HttpGet]
+        public async Task<ActionResult> GetBookById([FromQuery] GetBookRequest request)
+        {
+            var query = new GetBookByIdQuery(request.BookId);
+
+            var result = await _mediator.Send(query);
+
+            if (!result.Success)
+                return BadRequest(result);
+
+            return Ok(result);
+        }
+
+        [HttpPut]
+        public async Task<ActionResult> EditBookCommand([FromBody] EditBookRequest request)
+        {
+            var command = new EditBookCommand(
+                request.BookId,
+                request.Name,
+                request.Author,
+                request.ImageUrl,
+                request.Rating,
+                request.Status,
+                request.Description
+            );
+
+
+            var result = await _mediator.Send(command);
+
+            if (!result.Success)
+                return BadRequest(result);
+
+            return Ok(result);
+        }
     }
 }

@@ -7,13 +7,13 @@ namespace Book_manager.src.BookManager.Application.Services.Books.Query;
 
 public class SearchBooksQueryHandler : IRequestHandler<SearchBooksQuery, CommandResponse>
 {
-    public readonly IBookRepository bookRepository;
-    public SearchBooksQueryHandler(IBookRepository bookRepository) => this.bookRepository = bookRepository;
+    private readonly IBookRepository _bookRepository;
+    public SearchBooksQueryHandler(IBookRepository bookRepository) => _bookRepository = bookRepository;
     public async Task<CommandResponse> Handle(SearchBooksQuery request, CancellationToken cancellationToken)
     {
         IBookSearchQuery filter = BuildSearchFilter(request);
 
-        var books = await bookRepository.SearchAsync(filter);
+        var books = await _bookRepository.SearchAsync(filter);
 
         return new CommandResponse
         {
@@ -26,8 +26,8 @@ public class SearchBooksQueryHandler : IRequestHandler<SearchBooksQuery, Command
     {
         return new BookSearchQuery
         {
-            Name = request.query,
-            Status = request.bookStatus,
+            Name = request.Query,
+            Status = request.BookStatus,
             PageNumber = request.Page,
             PageSize = request.PageSize
         };

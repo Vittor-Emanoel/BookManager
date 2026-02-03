@@ -4,11 +4,10 @@ using Book_manager.src.BookManager.Domain.Enums;
 
 namespace Book_manager.src.BookManager.Api.DTO;
 
-
 public record SearchBooksRequest(
-    string? query,
+    string? Query,
 
-    BookStatus? bookStatus,
+    BookStatus? BookStatus,
 
     [Range(1, int.MaxValue)]
     int Page = 1,

@@ -40,6 +40,24 @@ public class Book
 
     }
 
+
+    public void Update(
+        string name,
+        string author,
+        string? imageUrl,
+        string? description,
+        BookStatus status,
+        int rating
+    )
+    {
+        Name = name;
+        Author = author;
+        ImageUrl = imageUrl;
+        Description = description;
+
+        ApplyStatus(status, rating);
+    }
+
     public void StartReading()
     {
         if (Status != BookStatus.ToRead)
@@ -58,6 +76,31 @@ public class Book
 
         Rating = rating;
         Status = BookStatus.Read;
+    }
+
+    private void ApplyStatus(BookStatus status, int rating)
+    {
+        switch (status)
+        {
+            case BookStatus.ToRead:
+                Status = BookStatus.ToRead;
+                Rating = 0;
+                break;
+
+            case BookStatus.Reading:
+                if (Status == BookStatus.ToRead)
+                    StartReading();
+                else
+                    Status = BookStatus.Reading;
+                break;
+
+            case BookStatus.Read:
+                if (Status == BookStatus.ToRead)
+                    StartReading();
+
+                FinishReading(rating);
+                break;
+        }
     }
 
 }

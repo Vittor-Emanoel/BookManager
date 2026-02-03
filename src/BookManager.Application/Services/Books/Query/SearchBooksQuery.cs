@@ -14,8 +14,8 @@ public enum BookOrderBy
 }
 
 public record SearchBooksQuery(
-    string? query,
-    BookStatus? bookStatus,
+    string? Query,
+    BookStatus? BookStatus,
     int Page = 1,
     int PageSize = 10,
     BookOrderBy OrderBy = BookOrderBy.Name,
