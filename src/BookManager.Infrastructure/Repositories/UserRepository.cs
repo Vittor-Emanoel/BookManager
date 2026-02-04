@@ -13,16 +13,15 @@ public class UserRepository : IUserRepository
 
   public async Task CreateAsync(User user)
   {
-    const string query = @"INSERT INTO Users(Id, Name, Email, PasswordHash, CreatedAt)
-                          VALUES (@Id, @Name, @Email, @PasswordHash, @CreatedAt)";
+    const string query = @"INSERT INTO ""Users""(""Id"", ""Name"", ""Email"", ""PasswordHash"", ""CreatedAt"") VALUES (@Id, @Name, @Email, @PasswordHash, @CreatedAt)";
 
     await DbConnection.ExecuteAsync(query, user);
   }
 
   public async Task<User?> GetByEmailAsync(string email)
   {
-    const string query = @"SELECT * FROM Users WHERE Email = @Email";
+    const string query = @"SELECT * FROM ""Users"" WHERE ""Email"" = @Email";
 
-    return await DbConnection.QueryFirstOrDefaultAsync(query, new { Email = email });
+    return await DbConnection.QueryFirstOrDefaultAsync<User>(query, new { Email = email });
   }
 }

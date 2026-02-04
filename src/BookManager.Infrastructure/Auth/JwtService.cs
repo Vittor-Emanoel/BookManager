@@ -15,7 +15,6 @@ public class JwtService : IJwtService
   }
 
 
-
   public string GenerateToken(Guid Id, string name, string email)
   {
     var key = _config["Jwt:key"]!;

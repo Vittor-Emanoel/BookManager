@@ -1,8 +1,9 @@
+using Book_manager.src.BookManager.Domain.Interfaces;
 using Microsoft.AspNetCore.Identity;
 
 namespace Book_manager.src.BookManager.Infrastructure.Security;
 
-public class PasswordHasher
+public class PasswordHasher : IPasswordHasher
 {
     private readonly PasswordHasher<object> _hasher = new();
 

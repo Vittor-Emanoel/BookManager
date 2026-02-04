@@ -36,7 +36,7 @@ namespace Book_manager.src.BookManager.Api.controllers
             return Ok(result);
         }
 
-        [HttpGet]
+        [HttpGet("Search")]
         public async Task<ActionResult> Search([FromQuery] SearchBooksRequest request)
         {
             var query = new SearchBooksQuery(

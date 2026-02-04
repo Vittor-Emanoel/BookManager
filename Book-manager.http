@@ -55,3 +55,21 @@ Accept: application/json
 ### 10) Ordenar por CreatedAt DESC (exemplo)
 GET {{Book_manager_HostAddress}}/Api/Books?orderBy=CreatedAt&desc=true&page=1&pageSize=10
 Accept: application/json
+
+
+
+### =========================
+### POST /Api/Auth (CREATE)
+### =========================
+POST {{Book_manager_HostAddress}}/Api/Books
+Accept: application/json
+Content-Type: application/json
+
+{
+  "name": "Dom Casmurro",
+  "author": "Machado de Assis",
+  "imageUrl": "https://example.com/domcasmurro.jpg",
+  "rating": 5,
+  "status": 2,
+  "description": "Um clássico da literatura brasileira."
+}
