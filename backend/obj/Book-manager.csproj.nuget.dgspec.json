@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/home/vittor/Book-manager/Book-manager.csproj": {}
+    "/home/vittor/Book-manager/backend/Book-manager.csproj": {}
   },
   "projects": {
-    "/home/vittor/Book-manager/Book-manager.csproj": {
+    "/home/vittor/Book-manager/backend/Book-manager.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/vittor/Book-manager/Book-manager.csproj",
+        "projectUniqueName": "/home/vittor/Book-manager/backend/Book-manager.csproj",
         "projectName": "Book-manager",
-        "projectPath": "/home/vittor/Book-manager/Book-manager.csproj",
+        "projectPath": "/home/vittor/Book-manager/backend/Book-manager.csproj",
         "packagesPath": "/home/vittor/.nuget/packages/",
-        "outputPath": "/home/vittor/Book-manager/obj/",
+        "outputPath": "/home/vittor/Book-manager/backend/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/vittor/.nuget/NuGet/NuGet.Config"
