@@ -8,7 +8,7 @@ public class AddUserIdToBooks : Migration
     public override void Up()
     {
         Alter.Table("Books")
-            .AddColumn("UserId").AsGuid().NotNullable().SetExistingRowsTo(Guid.Empty);
+            .AddColumn("UserId").AsGuid().Nullable();
 
         Create.ForeignKey("FK_Books_Users_UserId")
             .FromTable("Books").ForeignColumn("UserId")
