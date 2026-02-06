@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "2nEiq05W1esHOV75oqOMXU3idTWUyvl81Lp1zwsn9Tf/m1KgNdKWnzfiMQzAkx2AQvyrGccUNCcOau26qFXoNw==",
+  "dgSpecHash": "BV87laKf89W7EC68xPgggHQsCtQVCHLePfQttRmuwLqhJfNhQLe5Qv1DKwbKXQ1AyKM6lFnFZSTDyqLkGDeOYA==",
   "success": true,
   "projectFilePath": "/home/vittor/Book-manager/Book-manager.csproj",
   "expectedPackageFiles": [
@@ -33,6 +33,7 @@
     "/home/vittor/.nuget/packages/microsoft.aspnetcore.authentication.abstractions/2.3.0/microsoft.aspnetcore.authentication.abstractions.2.3.0.nupkg.sha512",
     "/home/vittor/.nuget/packages/microsoft.aspnetcore.authentication.cookies/2.3.0/microsoft.aspnetcore.authentication.cookies.2.3.0.nupkg.sha512",
     "/home/vittor/.nuget/packages/microsoft.aspnetcore.authentication.core/2.3.0/microsoft.aspnetcore.authentication.core.2.3.0.nupkg.sha512",
+    "/home/vittor/.nuget/packages/microsoft.aspnetcore.authentication.jwtbearer/8.0.0/microsoft.aspnetcore.authentication.jwtbearer.8.0.0.nupkg.sha512",
     "/home/vittor/.nuget/packages/microsoft.aspnetcore.cryptography.internal/2.3.0/microsoft.aspnetcore.cryptography.internal.2.3.0.nupkg.sha512",
     "/home/vittor/.nuget/packages/microsoft.aspnetcore.cryptography.keyderivation/2.3.0/microsoft.aspnetcore.cryptography.keyderivation.2.3.0.nupkg.sha512",
     "/home/vittor/.nuget/packages/microsoft.aspnetcore.dataprotection/2.3.0/microsoft.aspnetcore.dataprotection.2.3.0.nupkg.sha512",

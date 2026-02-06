@@ -1,19 +1,24 @@
 using Book_manager.src.BookManager.Api.DTO;
+using Book_manager.src.BookManager.Application.Services.Books.Command;
 using Book_manager.src.BookManager.Application.Services.Books.Command.CreateBook;
 using Book_manager.src.BookManager.Application.Services.Books.Query;
-using Book_manager.src.BookManager.Domain.Interfaces;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Book_manager.src.BookManager.Api.controllers
 {
     [Route("Api/[controller]")]
     [ApiController]
+    [Authorize]
     public class BooksController : ControllerBase
     {
         private readonly IMediator _mediator;
 
-        public BooksController(IMediator mediator) => _mediator = mediator;
+        public BooksController(IMediator mediator)
+        {
+            _mediator = mediator;
+        }
 
         [HttpPost]
         public async Task<ActionResult> Create([FromBody] CreateBookRequest request)
@@ -81,6 +86,19 @@ namespace Book_manager.src.BookManager.Api.controllers
                 request.Description
             );
 
+
+            var result = await _mediator.Send(command);
+
+            if (!result.Success)
+                return BadRequest(result);
+
+            return Ok(result);
+        }
+
+        [HttpDelete]
+        public async Task<ActionResult> DeleteBook([FromBody] DeleteBookRequest request)
+        {
+            var command = new DeleteBookCommand(request.BookId);
 
             var result = await _mediator.Send(command);
 

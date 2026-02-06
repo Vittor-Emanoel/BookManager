@@ -14,17 +14,33 @@ namespace Book_manager.src.BookManager.Infrastructure.repositories
 
         public BookRepository(IDbConnection dbConnection) => DbConnection = dbConnection;
 
-        public async Task<IEnumerable<Book>> GetAll()
+        public async Task<IEnumerable<Book>> GetAllByUserIdAsync(Guid userId)
         {
-            const string query = @"SELECT * FROM ""Books""";
+            const string query = @"SELECT * FROM ""Books"" WHERE ""UserId"" = @UserId";
 
-            return await DbConnection.QueryAsync<Book>(query);
+            return await DbConnection.QueryAsync<Book>(query, new { UserId = userId });
         }
 
         public async Task<bool> SaveAsync(Book item)
         {
-            const string query = @"INSERT INTO ""Books"" (""Name"", ""Author"", ""ImageUrl"", ""Rating"", ""Status"", ""Description"") 
-                      VALUES (@Name, @Author, @ImageUrl, @Rating, @Status, @Description)";
+            const string query = @"INSERT INTO ""Books"" (""UserId"", ""Name"", ""Author"", ""ImageUrl"", ""Rating"", ""Status"", ""Description"") 
+                      VALUES (@UserId, @Name, @Author, @ImageUrl, @Rating, @Status, @Description)";
+
+            var result = await DbConnection.ExecuteAsync(query, item);
+
+            return result > 0;
+        }
+
+        public async Task<bool> UpdateAsync(Book item)
+        {
+            const string query = @"UPDATE ""Books"" 
+                SET ""Name"" = @Name, 
+                    ""Author"" = @Author, 
+                    ""ImageUrl"" = @ImageUrl, 
+                    ""Rating"" = @Rating, 
+                    ""Status"" = @Status, 
+                    ""Description"" = @Description 
+                WHERE ""Id"" = @Id AND ""UserId"" = @UserId";
 
             var result = await DbConnection.ExecuteAsync(query, item);
 
@@ -35,13 +51,21 @@ namespace Book_manager.src.BookManager.Infrastructure.repositories
         {
             const string query = @"SELECT * FROM ""Books"" WHERE ""Id"" = @Id";
 
-            return await DbConnection.QueryFirstAsync<Book>(query);
+            return await DbConnection.QueryFirstOrDefaultAsync<Book>(query, new { Id = id });
         }
-        public async Task<bool> DeleteAsync(int id)
-        {
-            const string query = @"DELETE from ""Books"" WHERE ""Id"" = @Id";
 
-            var result = await DbConnection.ExecuteAsync(query, id);
+        public async Task<Book?> GetByIdAndUserIdAsync(int id, Guid userId)
+        {
+            const string query = @"SELECT * FROM ""Books"" WHERE ""Id"" = @Id AND ""UserId"" = @UserId";
+
+            return await DbConnection.QueryFirstOrDefaultAsync<Book>(query, new { Id = id, UserId = userId });
+        }
+
+        public async Task<bool> DeleteAsync(int id, Guid userId)
+        {
+            const string query = @"DELETE FROM ""Books"" WHERE ""Id"" = @Id AND ""UserId"" = @UserId";
+
+            var result = await DbConnection.ExecuteAsync(query, new { Id = id, UserId = userId });
 
             return result > 0;
         }
@@ -52,6 +76,13 @@ namespace Book_manager.src.BookManager.Infrastructure.repositories
             sqlBuilder.Append(@"SELECT * FROM ""Books"" WHERE 1 = 1 ");
 
             var parameters = new DynamicParameters();
+
+            // Filtro obrigatório por UserId
+            if (query.UserId.HasValue)
+            {
+                sqlBuilder.Append(@" AND ""UserId"" = @UserId ");
+                parameters.Add("@UserId", query.UserId.Value);
+            }
 
             if (!string.IsNullOrWhiteSpace(query.Name))
             {

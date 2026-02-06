@@ -5,6 +5,7 @@ namespace Book_manager.src.BookManager.Domain.Interfaces;
 
 public interface IBookSearchQuery
 {
+    Guid? UserId { get; init; }
     string? Name { get; init; }
     string? Author { get; init; }
     int? MinRating { get; init; }
@@ -17,9 +18,11 @@ public interface IBookSearchQuery
 
 public interface IBookRepository
 {
-    Task<IEnumerable<Book>> GetAll();
+    Task<IEnumerable<Book>> GetAllByUserIdAsync(Guid userId);
     Task<Book?> GetByIdAsync(int id);
+    Task<Book?> GetByIdAndUserIdAsync(int id, Guid userId);
     Task<bool> SaveAsync(Book item);
-    Task<bool> DeleteAsync(int id);
+    Task<bool> UpdateAsync(Book item);
+    Task<bool> DeleteAsync(int id, Guid userId);
     Task<IEnumerable<Book>> SearchAsync(IBookSearchQuery query);
 }

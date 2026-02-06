@@ -5,6 +5,7 @@ namespace Book_manager.src.BookManager.Domain.Queries;
 
 public class BookSearchQuery : IBookSearchQuery
 {
+  public Guid? UserId { get; init; }
   public string? Name { get; init; }
   public string? Author { get; init; }
   public int? MinRating { get; init; }

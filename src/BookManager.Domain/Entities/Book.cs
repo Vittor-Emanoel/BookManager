@@ -5,6 +5,7 @@ namespace Book_manager.src.BookManager.Domain.entities;
 public class Book
 {
     public long Id { get; private set; }
+    public Guid UserId { get; private set; }
     public string Name { get; private set; } = string.Empty;
     public string Author { get; private set; } = string.Empty;
     public string? ImageUrl { get; private set; }
@@ -15,12 +16,16 @@ public class Book
     private Book() { }
 
     public static Book Create(
+        Guid userId,
         string name,
         string author,
         string? imageUrl,
         string? description
     )
     {
+        if (userId == Guid.Empty)
+            throw new ArgumentException("'userId' is required.");
+
         if (string.IsNullOrWhiteSpace(name))
             throw new ArgumentException("'name' is required.");
 
@@ -30,6 +35,7 @@ public class Book
 
         return new Book
         {
+            UserId = userId,
             Name = name,
             Author = author,
             ImageUrl = imageUrl,

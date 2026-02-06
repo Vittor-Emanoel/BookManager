@@ -223,3 +223,4 @@ C:/Users/VittorEmanoel/Documents/apps/Book-manager-back/obj/Debug/net8.0/ref/Boo
 /home/vittor/Book-manager/bin/Debug/net8.0/Microsoft.Extensions.ObjectPool.dll
 /home/vittor/Book-manager/bin/Debug/net8.0/Microsoft.Extensions.WebEncoders.dll
 /home/vittor/Book-manager/bin/Debug/net8.0/System.Security.Cryptography.Xml.dll
+/home/vittor/Book-manager/bin/Debug/net8.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll

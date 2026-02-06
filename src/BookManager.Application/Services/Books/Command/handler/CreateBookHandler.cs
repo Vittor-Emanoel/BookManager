@@ -1,5 +1,6 @@
 using Book_manager.src.BookManager.Domain.entities;
 using Book_manager.src.BookManager.Domain.Interfaces;
+using Book_manager.src.BookManager.Application.Interfaces;
 using MediatR;
 using Book_manager.src.BookManager.Application.Common.Responses;
 
@@ -8,15 +9,29 @@ namespace Book_manager.src.BookManager.Application.Services.Books.Command.Create
     public class CreateBookHandler : IRequestHandler<CreateBookCommand, CommandResponse>
     {
         private readonly IBookRepository _booksRepository;
+        private readonly ICurrentUserService _currentUserService;
 
-        public CreateBookHandler(IBookRepository booksRepository)
+        public CreateBookHandler(IBookRepository booksRepository, ICurrentUserService currentUserService)
         {
             _booksRepository = booksRepository;
+            _currentUserService = currentUserService;
         }
 
         public async Task<CommandResponse> Handle(CreateBookCommand request, CancellationToken cancellationToken)
         {
+            var userId = _currentUserService.UserId;
+
+            if (userId == Guid.Empty)
+            {
+                return new CommandResponse
+                {
+                    Success = false,
+                    Message = "Usuário não autenticado."
+                };
+            }
+
             var book = Book.Create(
+                userId,
                 request.Name,
                 request.Author,
                 request.ImageUrl,
