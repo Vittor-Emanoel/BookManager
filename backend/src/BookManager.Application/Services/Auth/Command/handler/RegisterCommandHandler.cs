@@ -4,7 +4,7 @@ using Book_manager.src.BookManager.Domain.entities;
 using Book_manager.src.BookManager.Domain.Interfaces;
 using MediatR;
 
-public class RegisterCommandHandler : IRequestHandler<RegisterCommand, CommandResponse>
+public class RegisterCommandHandler : IRequestHandler<RegisterCommand, RegisterResponse>
 {
   private readonly IUserRepository _userRepository;
   private readonly IPasswordHasher _passwordHasher;
@@ -15,7 +15,7 @@ public class RegisterCommandHandler : IRequestHandler<RegisterCommand, CommandRe
     _passwordHasher = passwordHasher;
   }
 
-  public async Task<CommandResponse> Handle(RegisterCommand request, CancellationToken cancellationToken)
+  public async Task<RegisterResponse> Handle(RegisterCommand request, CancellationToken cancellationToken)
   {
     var userAlreadyExists = await _userRepository.GetByEmailAsync(request.Email);
 
@@ -28,10 +28,9 @@ public class RegisterCommandHandler : IRequestHandler<RegisterCommand, CommandRe
 
     await _userRepository.CreateAsync(user);
 
-    return new CommandResponse
+    return new RegisterResponse
     {
-      Data = user.Id,
-      Success = true
+      UserId = user.Id
     };
   }
 

@@ -5,7 +5,7 @@ using MediatR;
 
 namespace Book_manager.src.BookManager.Application.Services.Auth;
 
-public class LoginCommandHandler : IRequestHandler<LoginCommand, CommandResponse>
+public class LoginCommandHandler : IRequestHandler<LoginCommand, LoginResponse>
 {
 
   private readonly IUserRepository _userRepository;
@@ -19,7 +19,7 @@ public class LoginCommandHandler : IRequestHandler<LoginCommand, CommandResponse
     _jwtService = jwtService;
   }
 
-  async Task<CommandResponse> IRequestHandler<LoginCommand, CommandResponse>.Handle(LoginCommand request, CancellationToken cancellationToken)
+  public async Task<LoginResponse> Handle(LoginCommand request, CancellationToken cancellationToken)
   {
     var user = await _userRepository.GetByEmailAsync(request.Email);
 
@@ -34,10 +34,11 @@ public class LoginCommandHandler : IRequestHandler<LoginCommand, CommandResponse
     var token = _jwtService.GenerateToken(user.Id, user.Name, user.Email);
 
 
-    return new CommandResponse
+    return new LoginResponse
     {
-      Success = true,
-      Data = token
+      AccessToken = token
     };
   }
+
+
 }

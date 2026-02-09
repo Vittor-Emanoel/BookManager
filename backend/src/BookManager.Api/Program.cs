@@ -7,6 +7,17 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("Frontend", policy =>
+      {
+          policy
+              .WithOrigins("http://localhost:5174") // frontend
+              .AllowAnyHeader()
+              .AllowAnyMethod();
+      });
+});
+
 // Application
 builder.Services.AddApplication();
 
@@ -17,6 +28,10 @@ var app = builder.Build();
 
 // roda migrations automaticamente
 app.UseInfrastructure();
+
+
+app.UseCors("Frontend");
+
 
 if (app.Environment.IsDevelopment())
 {

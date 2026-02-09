@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Book_manager.src.BookManager.Api.controllers;
 
-[Route("Api/[controller]")]
+[Route("auth")]
 [ApiController]
 public class AuthController : ControllerBase
 {
@@ -14,6 +14,7 @@ public class AuthController : ControllerBase
   public AuthController(IMediator mediator) => _mediator = mediator;
 
   [HttpPost]
+  [HttpPost("register")]
   public async Task<ActionResult> Register(RegisterUserRequest request)
   {
     var command = new RegisterCommand(
@@ -24,20 +25,20 @@ public class AuthController : ControllerBase
 
     var result = await _mediator.Send(command);
 
-    if (!result.Success)
+    if (result.UserId == Guid.Empty)
       return BadRequest(result);
 
     return Ok(result);
   }
 
-  [HttpPost("Login")]
+  [HttpPost("login")]
   public async Task<ActionResult> Login(LoginUserRequest request)
   {
     var command = new LoginCommand(request.Email, request.Password);
 
     var result = await _mediator.Send(command);
 
-    if (!result.Success)
+    if (string.IsNullOrEmpty(result.AccessToken))
       return BadRequest(result);
 
     return Ok(result);

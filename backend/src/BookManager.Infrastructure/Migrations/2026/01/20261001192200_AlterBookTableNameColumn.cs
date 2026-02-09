@@ -2,7 +2,7 @@ using FluentMigrator;
 
 namespace Book_manager.Migrations;
 
-[Migration(20261001192200)]
+[Migration(202602010001)]
 public class AlterBookTableNameColumn : Migration
 {
 

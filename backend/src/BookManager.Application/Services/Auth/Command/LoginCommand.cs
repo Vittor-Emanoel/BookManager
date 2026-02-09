@@ -8,4 +8,4 @@ public record LoginCommand(
   [EmailAddress]
   string Email,
   [MaxLength(8)]
-  string Password) : IRequest<CommandResponse>;
+  string Password) : IRequest<LoginResponse>;
