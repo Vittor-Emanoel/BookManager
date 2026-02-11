@@ -1,4 +1,4 @@
-import { Dashboard } from "@/view/pages/dashboard";
+import { Home } from "@/view/pages/dashboard";
 import { Login } from "@/view/pages/login";
 import { Register } from "@/view/pages/register";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
@@ -14,7 +14,7 @@ export function Router() {
         </Route>
 
         <Route element={<AuthGuard isPrivate />}>
-          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/" element={<Home />} />
         </Route>
       </Routes>
     </BrowserRouter>

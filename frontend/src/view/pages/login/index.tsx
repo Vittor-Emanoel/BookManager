@@ -89,7 +89,10 @@ export const Login = () => {
           <Button className="w-full">Entrar</Button>
           <p className="text-sm text-muted-foreground">
             Nao possui uma conta?{" "}
-            <Link to="/" className="font-medium text-primary hover:underline">
+            <Link
+              to="/register"
+              className="font-medium text-primary hover:underline"
+            >
               Cadastrar
             </Link>
           </p>
