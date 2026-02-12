@@ -27,24 +27,23 @@ public class JwtService : IJwtService
       new Claim(JwtRegisteredClaimNames.Sub, Id.ToString()),
       new Claim(JwtRegisteredClaimNames.Email, email),
       new Claim("name", name),
+      new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
     };
 
     var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key));
     var creds = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
 
-
     var expires = DateTime.UtcNow.AddHours(5);
 
     var token = new JwtSecurityToken(
-      issuer,
-      audience,
-      claims,
-      expires,
-      signingCredentials: creds
-    );
-
+     issuer,
+     audience,
+     claims,
+     DateTime.UtcNow,
+     expires,
+     creds
+   );
 
     return new JwtSecurityTokenHandler().WriteToken(token);
-
   }
 }

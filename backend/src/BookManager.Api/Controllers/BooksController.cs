@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Book_manager.src.BookManager.Api.controllers
 {
-    [Route("Api/[controller]")]
+    [Route("books")]
     [ApiController]
     [Authorize]
     public class BooksController : ControllerBase
@@ -41,7 +41,7 @@ namespace Book_manager.src.BookManager.Api.controllers
             return Ok(result);
         }
 
-        [HttpGet("Search")]
+        [HttpGet("search")]
         public async Task<ActionResult> Search([FromQuery] SearchBooksRequest request)
         {
             var query = new SearchBooksQuery(

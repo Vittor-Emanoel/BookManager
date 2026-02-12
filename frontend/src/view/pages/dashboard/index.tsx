@@ -1,3 +1,4 @@
+import { BooksList } from "@/view/components/books-list";
 import { Header } from "@/view/components/header";
 import { SearchBar } from "@/view/components/search-bar";
 
@@ -7,6 +8,8 @@ export const Home = () => {
       <Header />
       <section className="mt-8">
         <SearchBar />
+
+        <BooksList />
       </section>
     </div>
   );
