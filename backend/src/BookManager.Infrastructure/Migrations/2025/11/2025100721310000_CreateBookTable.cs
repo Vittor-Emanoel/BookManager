@@ -5,13 +5,7 @@ namespace Book_manager.Migrations;
 [Migration(2025100721310000)]
 public class CreateBookTable : Migration
 {
-  public override void Down()
-  {
-    if (Schema.Table("Books").Exists())
-    {
-      Delete.Table("Books");
-    }
-  }
+
 
   public override void Up()
   {
@@ -26,4 +20,13 @@ public class CreateBookTable : Migration
         .WithColumn("Description").AsAnsiString();
     }
   }
+
+
+    public override void Down()
+    {
+        if (Schema.Table("books").Exists())
+        {
+            Delete.Table("books");
+        }
+    }
 }

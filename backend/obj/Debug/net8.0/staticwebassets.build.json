@@ -1,11 +1,1 @@
-{
-  "Version": 1,
-  "Hash": "KH+6gfkQ760Fx5KBBBUA2ZkjHAqN6HBgKcRxRhY3ZPw=",
-  "Source": "Book-manager",
-  "BasePath": "_content/Book-manager",
-  "Mode": "Default",
-  "ManifestType": "Build",
-  "ReferencedProjectsConfiguration": [],
-  "DiscoveryPatterns": [],
-  "Assets": []
-}
+{"Version":1,"Hash":"oG7rRc8wZQ36MHL++UFeLqWRwer+ZIn0WEYO9Y1O+P8=","Source":"Book-manager","BasePath":"/","Mode":"Root","ManifestType":"Build","ReferencedProjectsConfiguration":[],"DiscoveryPatterns":[],"Assets":[],"Endpoints":[]}
